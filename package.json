@@ -1,0 +1,25 @@
+{
+  "name": "mean-first-app",
+  "version": "1.0.0",
+  "description": "For integrated build:",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "jest": "^26.4.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.7",
+    "puppeteer": "^5.3.1"
+  },
+  "jest": {
+    "setupFilesAfterEnv": ["./test/setup.js"]
+  },
+  "scripts": {
+    "test": "jest --testEnvironment=node"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.globant.com/jorge-melgoza/mean-first-app.git"
+  },
+  "author": "",
+  "license": "ISC"
+}

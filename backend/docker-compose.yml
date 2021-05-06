@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  database:
+    image: mongo:latest
+    container_name: 'mongo-db-test'
+    environment:
+      - MONGO_INITDB_DATABASE=mongo-db-test
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=rootpassword
+    ports:
+      - 27017-27019:27017-27019
+    volumes:
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+      - ./mongo-volume:/data/db
+    restart: always
+
+  backend:
+    image: jorgemelgoza/node-mean-first:1.0.3
+    links:
+     - database
+    depends_on:
+      - database
+    container_name: 'node-mean-first'
+    environment:
+      - JWT_KEY=ABCDEFG123456789
+      - DB_HOST=database
+      - DB_PORT=27017
+      - DB_NAME=mean-first-app
+    ports:
+      - 3000:3000
+    volumes:
+      - ./node-bck/images:/images
+    restart: always
